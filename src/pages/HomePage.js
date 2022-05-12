@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 // import axios from "axios";
-import { fetchPosts } from "../store/Feed/actions";
+import { fetchPosts } from "../store/Feed/thunk";
 import { selectAllPosts } from "../store/Feed/selectors";
 
 // const API_URL = `https://codaisseur-coders-network.herokuapp.com`;
@@ -37,7 +38,11 @@ export default function Homepage() {
       <h2>Posts</h2>
       {!posts.length
         ? "Loading"
-        : posts.map((post) => <p key={post.id}>{post.title}</p>)}
+        : posts.map((post) => (
+            <p key={post.id}>
+              <Link to={`/post/${post.id}`}>{post.title}</Link>
+            </p>
+          ))}
       <button onClick={() => dispatch(fetchPosts)}>Load more</button>
     </div>
   );
