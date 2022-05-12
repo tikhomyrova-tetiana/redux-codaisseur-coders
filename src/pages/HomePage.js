@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import axios from "axios";
 import { fetchPosts } from "../store/Feed/actions";
@@ -35,7 +35,10 @@ export default function Homepage() {
   return (
     <div>
       <h2>Posts</h2>
-      {!posts.length ? "Loading" : posts.map((post) => <p>{post.title}</p>)}
+      {!posts.length
+        ? "Loading"
+        : posts.map((post) => <p key={post.id}>{post.title}</p>)}
+      <button onClick={() => dispatch(fetchPosts)}>Load more</button>
     </div>
   );
 }
